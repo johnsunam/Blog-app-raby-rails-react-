@@ -3,6 +3,8 @@ import { getArticles,  } from '../actions/article';
 import { connect } from 'react-redux';
 import { Card, Col, Row } from 'antd';
 import Loader from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
+
 
 
 class Home extends Component {
@@ -21,9 +23,12 @@ class Home extends Component {
                                       width="100"
                                     /> : <div style={{ background: '#ECECEC', padding: '30px' }}>
                                       <Row gutter={16}>
-                                        {this.props.articles.map(article => <Col span={8}>
+                                        {this.props.articles.map(article => <Col key={article.id} span={8} style={{marginTop: 15, minHeight: 50}}>
                                           <Card title={article.title} bordered={false}>
-                                            {article.description}
+                                            {article.description.substring(0, 100)} ...
+                                            <p>
+                                              <Link to={`articles/${article.id}/`}>detail...</Link>
+                                            </p>
                                           </Card>
                                         </Col>)}
                                       </Row>

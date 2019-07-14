@@ -1,11 +1,28 @@
 module API
   class ArticlesController < ApplicationController
+    protect_from_forgery with: :null_session
     def index
       if params[:id]
         article = Article.find(params[:id])
         render json: article, status: :ok 
       else 
         render json: Article.all
+      end
+    end
+    def create
+      title = params[:title]
+      user = params[:user_id]
+      description = params[:description]
+      @article = Article.create(
+        title: title,
+        user_id: user,
+        description: description
+      )
+      if @article.save
+        response = { message: 'Article save successfully.', article: @article }
+        render json: response, status: :created
+      else 
+        render json: @article.errors, status: :bad
       end
     end
     def show

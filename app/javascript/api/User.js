@@ -5,6 +5,9 @@ export const register = data => {
 }
 
 export const login = data => {
-  console.log('login', data);
   return axios.post('/api/login', data);
-} 
+}
+
+export const logout = () => {
+  return axios.delete('/api/logout');
+}

@@ -13,6 +13,7 @@ class Login extends Component {
     const self = this;
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        self.props.onCancel();
         console.log('Received values of form: ', values);
         self.props.dispatch(loginUser(values));
       }

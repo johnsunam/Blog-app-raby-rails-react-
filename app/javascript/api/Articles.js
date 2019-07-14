@@ -7,3 +7,11 @@ export const fetchArticles = () => {
 export const fetchArticleById = (id) => {
   return axios.get(`api/articles/${id}`);
 }
+
+export const createArticle = data => {
+  return axios.post(`api/articles`, data);
+}
+
+export const fetchArticle = id => {
+  return axios.get(`/api/articles/${id}`);
+}
