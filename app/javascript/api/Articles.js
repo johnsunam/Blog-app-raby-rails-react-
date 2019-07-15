@@ -15,3 +15,7 @@ export const createArticle = data => {
 export const fetchArticle = id => {
   return axios.get(`/api/articles/${id}`);
 }
+
+export const fetchLike = id => {
+  return axios.get(`/api/like/${id}`);
+}

@@ -29,5 +29,16 @@ module API
       article = Article.find(params[:id])
       render json: article, status: :ok
     end
+    def like
+      @article = Article.find(params[:blog])
+      saveLike = @article.update_attributes(
+       like: @article.like + 1
+      )
+      if saveLike
+        render json: { likes: @article.like }, status: :ok
+      else 
+        render json:saveLike.errors, status: :bad 
+      end
+    end
   end
 end

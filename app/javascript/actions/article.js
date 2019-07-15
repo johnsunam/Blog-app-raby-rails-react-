@@ -1,4 +1,4 @@
-import { fetchArticles, fetchArticleById, createArticle, fetchArticle } from '../api/Articles';
+import { fetchArticles, fetchArticleById, createArticle, fetchArticle, fetchLike } from '../api/Articles';
 
 export const getArticles = () => (dispatch) => {
   dispatch({
@@ -46,4 +46,17 @@ export const getArticle = id => dispatch => {
             })
           })
           .catch(err => console.log('err', err))
+}
+
+export const likeArticle = id => (dispatch, getState) => {
+  return fetchLike(id)
+          .then(res => {
+            const articleState = { ...getState().articleReducer };
+            articleState.article.like = res.data.likes;
+            dispatch({
+              type: 'ARTICLE_FETCH_SUCCESS',
+              payload: articleState.article,
+            })
+          })
+          .catch(err => console.log('err', err));
 }
