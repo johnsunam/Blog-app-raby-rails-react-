@@ -32,18 +32,18 @@ class Comments extends Component {
   }
 
   render() {
-    const { comments } = this.props;
+    const { comments, userId } = this.props;
     return (
       <div>
         {comments.map(comment => <ExampleComment data={comment}/>)}
 
-        <Row>
+        { userId ? <Row>
           <Col span={18}>
             <Comment 
               content={
                 <div>
                   <Form.Item>
-                    <TextArea rows={4} onChange={this.onChange} value={this.state.value} />
+                    <TextArea rows={4} onChange={this.onChange} value={this.state.value} placeholder="Leave you comment here....."/>
                   </Form.Item>
                   <Form.Item>
                     <Button htmlType="submit"  onClick={this.onSubmit} type="primary" disabled={!(this.state.value.length > 3)}>
@@ -54,7 +54,7 @@ class Comments extends Component {
               }
             />
           </Col>
-        </Row>
+        </Row>:''}
         
       </div>
     )

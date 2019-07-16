@@ -28,7 +28,7 @@ class Article extends Component {
               <p>{article.description}</p>
               {user.id && user.id !== article.user_id ? 
                 <span><Icon style={article.id && article.liked_user.includes(user.id) ? {color: 'blue'}: {}} type="like" onClick={this.likeArticle} />{article.like ? article.like:''}</span> : ''}
-              {article.id ? <Comments articleId={article.id}/> : ''}
+              {article.id ? <Comments articleId={article.id} userId={user.id}/> : ''}
     </div>)
   }
 }
