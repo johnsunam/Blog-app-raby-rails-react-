@@ -9,7 +9,7 @@ class App extends Component {
   render () {
     return (
         <Switch>
-          <Route exact path="/" render={props => <AppLayout><Home /></AppLayout>} />
+          <Route exact path="/" render={props => <AppLayout><Home { ...props }/></AppLayout>} />
           <Route exact path="/articles/:id" render={props => <AppLayout><Article { ...props }/></AppLayout>} />
           <Route exact path="/create_blog" render={props => <AppLayout><CreateForm {...props}/></AppLayout>} />
         </Switch>

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import capitalize from 'capitalize';
 import { Icon } from 'antd';
-import { getArticle, likeArticle } from '../actions/article'
+import { getArticle, likeArticle } from '../actions/article';
+import Comments from './Comment';
 class Article extends Component {
   constructor(props) {
     super(props);
@@ -14,15 +15,20 @@ class Article extends Component {
 
   }
   likeArticle = () => {
-    this.props.dispatch(likeArticle(this.props.article.id));
+    const { user, article } = this.props;
+    if (!article.liked_user.includes(user.id))
+      this.props.dispatch(likeArticle(this.props.article.id));
   }
   render () {
+    const { article, user } = this.props;
     return (<div>
-              <h1>{ this.props.article.title && capitalize.words(this.props.article.title)}</h1>
-              <span style={{fontSize: 'small'}}>{moment(this.props.article.created_at).format('MMMM Do YYYY')}</span>
+              <h1>{ article.title && capitalize.words(article.title)}</h1>
+              <span style={{fontSize: 'small'}}>{moment(article.created_at).format('MMMM Do YYYY')}</span>
               <hr />
-              <p>{this.props.article.description}</p>
-              {this.props.user.id !== this.props.article.user_id ? <span><Icon type="like" onClick={this.likeArticle} />{this.props.article.like ? this.props.article.like:''}</span> : ''}
+              <p>{article.description}</p>
+              {user.id && user.id !== article.user_id ? 
+                <span><Icon style={article.id && article.liked_user.includes(user.id) ? {color: 'blue'}: {}} type="like" onClick={this.likeArticle} />{article.like ? article.like:''}</span> : ''}
+              {article.id ? <Comments articleId={article.id}/> : ''}
     </div>)
   }
 }

@@ -6,7 +6,7 @@ export const loginUser = (data) => (dispatch) => {
             localStorage.setItem("user", JSON.stringify(res.data.data))
             dispatch({
               type: 'LOGIN_USER',
-              payload: res.data
+              payload: res.data.data
             });
           })
           .error(err => {

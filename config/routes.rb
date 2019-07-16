@@ -10,10 +10,11 @@ Rails.application.routes.draw do
         post :register
       end
     end
+    resources :comments, only: [:index, :create, :show]
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
-    get '/like/:blog', to: 'articles#like'
+    get '/like/:blog/:user', to: 'articles#like'
   end
 
   match '*path', to: 'pages#index', via: :all

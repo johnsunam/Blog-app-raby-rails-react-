@@ -14,16 +14,5 @@ module API
         render json: @user.errors, status: :bad
       end
     end
-    private
-
-    def user_params
-
-      params.require(:user).permit(:username, :email, :password)
-      
-      binding.pry
-      
-
-    end
-
   end
 end

@@ -49,10 +49,11 @@ export const getArticle = id => dispatch => {
 }
 
 export const likeArticle = id => (dispatch, getState) => {
-  return fetchLike(id)
+  return fetchLike(id, getState().currentReducer.data.id)
           .then(res => {
             const articleState = { ...getState().articleReducer };
             articleState.article.like = res.data.likes;
+            articleState.article.liked_user = res.data.liked_user;
             dispatch({
               type: 'ARTICLE_FETCH_SUCCESS',
               payload: articleState.article,

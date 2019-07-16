@@ -16,6 +16,6 @@ export const fetchArticle = id => {
   return axios.get(`/api/articles/${id}`);
 }
 
-export const fetchLike = id => {
-  return axios.get(`/api/like/${id}`);
+export const fetchLike = (id, user) => {
+  return axios.get(`/api/like/${id}/${user}`);
 }

@@ -31,11 +31,14 @@ module API
     end
     def like
       @article = Article.find(params[:blog])
+      liked_user = @article.liked_user
+      liked_user.push(params[:user])
       saveLike = @article.update_attributes(
-       like: @article.like + 1
+       like: @article.like + 1,
+       liked_user: liked_user
       )
       if saveLike
-        render json: { likes: @article.like }, status: :ok
+        render json: { likes: @article.like, liked_user: @article.liked_user }, status: :ok
       else 
         render json:saveLike.errors, status: :bad 
       end

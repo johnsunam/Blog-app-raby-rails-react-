@@ -11,7 +11,7 @@ module API
         response = { message: 'User loggedIn!!', data: current_user }
         render json: response, status: :ok
       else 
-        render json: { message: 'Invalid email/password combination!!' }
+        render json: { message: 'Invalid email/password combination!!' }, status: :bad
       end
     end
 
